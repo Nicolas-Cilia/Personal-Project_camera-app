@@ -5,9 +5,42 @@
     <link rel="icon" type="image/svg+xml" href="/link-image.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Camera App</title>
+
+    <style>
+      h1 {
+        font-family: sans-serif;
+        color: #333;
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+      #container {
+        margin: 0px auto;
+        width: 500px;
+        height: 375px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 10px solid gray;
+      }
+      #videoElement {
+        width: 500px;
+        height: 375px;
+        background-color: #333;
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <h1>Face Landmarks Detection</h1>
+    <div id="container">
+      <video autoplay="true" id="videoElement">
+
+      </video>
+    </div>
+
   </body>
 </html>
