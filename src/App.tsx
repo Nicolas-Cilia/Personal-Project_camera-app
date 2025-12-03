@@ -1,51 +1,51 @@
-import { useEffect, useRef } from 'react'
+import { useState } from 'react'
 import './App.css'
+import Landing from './components/Landing'
+import Selections, { type WigPreferences } from './components/Selections'
+import Camera from './components/Camera'
+import Loading from './components/Loading'
+import Results from './components/Results'
+
+type Step = 'landing' | 'selections' | 'camera' | 'loading' | 'results'
 
 function App() {
-  const videoRef = useRef<HTMLVideoElement>(null)
+  const [currentStep, setCurrentStep] = useState<Step>('landing')
+  const [wigPreferences, setWigPreferences] = useState<WigPreferences | null>(null)
+  // _capturedImage will be used for TensorFlow processing
+  const [_capturedImage, setCapturedImage] = useState<string | null>(null)
 
-  useEffect(() => {
-    const video = videoRef.current
+  const handleLandingNext = () => {
+    setCurrentStep('selections')
+  }
 
-    if (!video) return
+  const handleSelectionsNext = (preferences: WigPreferences) => {
+    setWigPreferences(preferences)
+    setCurrentStep('camera')
+  }
 
-    if (navigator.mediaDevices.getUserMedia) {
-      navigator.mediaDevices.getUserMedia({ video: true })
-        .then(function(stream) {
-          video.srcObject = stream
-        })
-        .catch(function(error) {
-          console.log('Error: ' + error)
-        })
-    } else {
-      console.log('getUserMedia not supported')
-    }
+  const handleCameraCapture = (imageDataUrl: string) => {
+    setCapturedImage(imageDataUrl)
+    setCurrentStep('loading')
+    
+    // TODO: Process image with TensorFlow here
+    // For now, simulate processing delay, then move to results
+    // When TensorFlow is integrated, call setCurrentStep('results') after analysis completes
 
-    // Cleanup function to stop the stream when component unmounts
-    return () => {
-      if (video.srcObject) {
-        const stream = video.srcObject as MediaStream
-        stream.getTracks().forEach(track => track.stop())
-      }
-    }
-  }, [])
+    setTimeout(() => {
+      setCurrentStep('results')
+    }, 3000) // 3 second placeholder delay
+  }
 
   return (
-    <>
-      <h1>Wig Matcher</h1>
-      <div className="container">
-        <video
-          ref={videoRef}
-          autoPlay
-          className="video-element"
-        />
-        <img
-          src="/facial-silhouette.svg"
-          alt="Face guide"
-          className="silhouette-overlay"
-        />
-      </div>
-    </>
+    <div className="app-container">
+      {currentStep === 'landing' && <Landing onNext={handleLandingNext} />}
+      {currentStep === 'selections' && <Selections onNext={handleSelectionsNext} />}
+      {currentStep === 'camera' && <Camera onCapture={handleCameraCapture} />}
+      {currentStep === 'loading' && <Loading />}
+      {currentStep === 'results' && wigPreferences && (
+        <Results preferences={wigPreferences} />
+      )}
+    </div>
   )
 }
 
