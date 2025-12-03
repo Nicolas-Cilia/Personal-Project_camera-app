@@ -5,30 +5,9 @@
     <link rel="icon" type="image/svg+xml" href="/link-image.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Camera App</title>
-    <link rel="stylesheet" href="styles.css">
   </head>
   <body>
-    <h1>Wig Matcher</h1>
-    <div id="container">
-      <video autoplay="true" id="videoElement">
-      </video>
-      <img id="silhouette-overlay" src="assets/facial-silhouette.svg" alt="Face guide">
-    </div>
-
-    <script>
-      let video = document.querySelector('#videoElement');
-
-      if (navigator.mediaDevices.getUserMedia) {
-        navigator.mediaDevices.getUserMedia({ video: true })
-        .then(function(stream) {
-          video.srcObject = stream;
-        })
-        .catch(function(error) {
-          console.log('Error: ' + error);
-        });
-      } else {
-        console.log('getUserMedia not supported');
-      }
-    </script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
