@@ -1,0 +1,97 @@
+.selections-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    min-height: 100vh;
+}
+
+.selections-container h1 {
+    font-family: sans-serif;
+    color: #333;
+    font-size: 36px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.selections-subtitle {
+    font-family: sans-serif;
+    color: #666;
+    font-size: 18px;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.selection-section {
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+.selection-section h2 {
+    font-family: sans-serif;
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.option-button {
+    padding: 12px 20px;
+    font-size: 16px;
+    font-family: sans-serif;
+    color: #333;
+    background-color: #f5f5f5;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.option-button:hover {
+    background-color: #e8e8e8;
+    border-color: #4CAF50;
+}
+
+.option-button.selected {
+    background-color: #4CAF50;
+    color: white;
+    border-color: #4CAF50;
+    font-weight: bold;
+}
+
+.selections-next-button {
+    margin-top: 30px;
+    padding: 16px 32px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.selections-next-button:hover:not(:disabled) {
+    background-color: #45a049;    
+}
+
+.selections-next-button:active:not(:disabled) {
+    background-color: #3d8b40;
+}
+
+.selections-next-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+

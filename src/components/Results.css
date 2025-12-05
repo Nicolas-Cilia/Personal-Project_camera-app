@@ -1,0 +1,43 @@
+.results-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 32px 20px 60px;
+  min-height: 100vh;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.results-header h1 {
+  color: #1f2a44;
+  font-size: 34px;
+  margin: 0 0 8px;
+  text-align: center;
+}
+
+.results-subtitle {
+  color: #56627a;
+  font-size: 17px;
+  margin: 0 0 16px;
+  text-align: center;
+}
+
+.results-next {
+  background: #0b63d6;
+  color: #f7fbff;
+  padding: 18px 20px;
+  border-radius: 14px;
+  box-shadow: 0 8px 18px rgba(11, 99, 214, 0.25);
+}
+
+.results-next h3 {
+  margin: 0 0 6px;
+  font-size: 18px;
+}
+
+.results-next p {
+  margin: 0;
+  line-height: 1.5;
+  color: #e9f1ff;
+}
