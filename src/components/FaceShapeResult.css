@@ -1,0 +1,78 @@
+.face-shape-card {
+  width: 100%;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.face-shape-top {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 14px;
+  align-items: center;
+}
+
+.face-shape-main h2 {
+  margin: 4px 0;
+  font-size: 24px;
+  color: #111827;
+}
+
+.face-shape-eyebrow {
+  margin: 0;
+  color: #6b7280;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.face-shape-desc {
+  margin: 4px 0;
+  color: #4b5563;
+  line-height: 1.4;
+}
+
+.face-shape-confidence {
+  margin: 2px 0 0;
+  color: #1f2937;
+  font-weight: 600;
+}
+
+.face-shape-waiting {
+  margin: 0;
+  color: #6b7280;
+}
+
+.face-shape-error {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #991b1b;
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 8px;
+}
+
+.face-shape-hint {
+  margin: 6px 0 0;
+  color: #b91c1c;
+  font-size: 14px;
+}
+
+.face-preview {
+  width: 128px;
+  height: 128px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+}
+
+.face-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

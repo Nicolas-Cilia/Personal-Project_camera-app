@@ -5,14 +5,16 @@ import Selections, { type WigPreferences } from './components/Selections'
 import Camera from './components/Camera'
 import Loading from './components/Loading'
 import Results from './components/Results'
+import { analyzeFaceShape, type FaceAnalysis } from './utils/faceAnalysis'
 
 type Step = 'landing' | 'selections' | 'camera' | 'loading' | 'results'
 
 function App() {
   const [currentStep, setCurrentStep] = useState<Step>('landing')
   const [wigPreferences, setWigPreferences] = useState<WigPreferences | null>(null)
-  // _capturedImage will be used for TensorFlow processing
-  const [_capturedImage, setCapturedImage] = useState<string | null>(null)
+  const [capturedImage, setCapturedImage] = useState<string | null>(null)
+  const [faceAnalysis, setFaceAnalysis] = useState<FaceAnalysis | null>(null)
+  const [analysisError, setAnalysisError] = useState<string | null>(null)
 
   const handleLandingNext = () => {
     setCurrentStep('selections')
@@ -23,17 +25,22 @@ function App() {
     setCurrentStep('camera')
   }
 
-  const handleCameraCapture = (imageDataUrl: string) => {
+  const handleCameraCapture = async (imageDataUrl: string) => {
     setCapturedImage(imageDataUrl)
     setCurrentStep('loading')
-    
-    // TODO: Process image with TensorFlow here
-    // For now, simulate processing delay, then move to results
-    // When TensorFlow is integrated, call setCurrentStep('results') after analysis completes
 
-    setTimeout(() => {
+    setAnalysisError(null)
+    setFaceAnalysis(null)
+
+    try {
+      const analysis = await analyzeFaceShape(imageDataUrl)
+      setFaceAnalysis(analysis)
+    } catch (error) {
+      console.error('Face analysis failed', error)
+      setAnalysisError('We could not confidently read your face shape. Try retaking the photo with clear lighting.')
+    } finally {
       setCurrentStep('results')
-    }, 3000) // 3 second placeholder delay
+    }
   }
 
   return (
@@ -43,7 +50,12 @@ function App() {
       {currentStep === 'camera' && <Camera onCapture={handleCameraCapture} />}
       {currentStep === 'loading' && <Loading />}
       {currentStep === 'results' && wigPreferences && (
-        <Results preferences={wigPreferences} />
+        <Results
+          preferences={wigPreferences}
+          analysis={faceAnalysis}
+          capturedImage={capturedImage}
+          error={analysisError}
+        />
       )}
     </div>
   )
